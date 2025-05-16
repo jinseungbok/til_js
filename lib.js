@@ -1,44 +1,36 @@
-// 동물
-class Animal {
-  constructor(eye, nose) {
-    this.eye = eye;
-    this.nose = nose;
-  }
-  speak() {
-    console.log("소리를 내요");
-  }
-}
-const a = new Animal(2, 1);
-a.speak();
+// 데이터 서버에 자료를 호출함.
 
-console.log(a);
-// 강아지
-class Dog extends Animal {
-  constructor() {
-    super(2, 5); // new Animal();
-    // new Animal(); 을 실행하는 기능, constructor 실행
-    this.name = "강아지";
-  }
-  speak() {
-    console.log("멍멍이라고 소리를 내요");
-  }
+function getData(api = "posts") {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+    xhr.send();
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // 성공
+        resolve(xhr.response);
+      } else if (xhr.status === 404) {
+        // 실패
+        reject();
+      } else if (xhr.status === 505) {
+        console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+      }
+    };
+  });
 }
-
-const b = new Dog();
-b.speak();
-console.log(b);
-
-// 새
-class Bird extends Animal {
-  constructor() {
-    super(2, 1);
-    this.name = "이쁜새";
-    this.city = "대구";
-  }
-  speak() {
-    console.log("짹짹이라고 소리르 ㄹ내요");
-  }
-}
-const c = new Bird();
-c.speak();
-console.log(c);
+// 콜백함수 만들기 : 자료가 들어오면 처리함.
+const postsParser = function (res) {
+  console.log(res);
+};
+const commentsParser = function (res) {};
+const albumsParser = function (res) {};
+const photosParser = function (res) {};
+const todosParser = function (res) {};
+const usersParser = function (res) {};
+// 함수 사용
+getData("posts", postsParser);
+getData("comments", commentsParser);
+getData("albums", albumsParser);
+getData("photos", photosParser);
+getData("todos", todosParser);
+getData("users", usersParser);
