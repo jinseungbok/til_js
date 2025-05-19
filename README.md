@@ -2590,34 +2590,37 @@ console.log(a.#nose); // private 오류
 ```
 
 ### 12.6. static : 클래스에 고정된 property, method
+
 ```js
 class MathCalc {
   constructor() {}
   static add(a, b) {}
   static minus(a, b) {}
 }
-MathCalc.add(3,4);
-MathCalc.minus(3,4);
+MathCalc.add(3, 4);
+MathCalc.minus(3, 4);
 
 const a = new MathCalc();
 a.add(3, 4); // 에러. 생성된 객체로 접근 불가
 ```
 
 ## 13. 롤백 함수
+
 - `call`은 함수를 실행(호출)한다는 의미
 - 일반 함수에 `매개변수로 전달된 함수`를 callback 함수라 칭한다.
 
 ### 13.1. 콜백함수 활용처
+
 - 주로 사용자 행동에 따른 `이벤트 발생`시 실행하는 함수
 - 인터넷 네트웍 연동하여 자료를 호출하는 `이벤트 발생`시 실행하는 함수
 
 ```js
-const say = function() {};
+const say = function () {};
 const cry = () => {};
 
 // 매개변수로 전달된 함수 실행
-function run( a ) {
-a();
+function run(a) {
+  a();
 }
 
 run(say);
@@ -2629,12 +2632,13 @@ run(function () {});
 
 ```js
 const bt = document.querySelector(".bt");
-bt.addEventListener("click", function(){});
+bt.addEventListener("click", function () {});
 ```
 
 ## 14. 객체 (Object)
 
 ### 14.1. 객체를 가장 간단하게 만드는 법.
+
 - `객체 리터럴`로 생성한다.
 - `리터럴(literal)` 이라는 단어는 꼭 정의해 두세요.
 - 리터럴은 정해진 `값을 개발자가 직접 작성`해 주는 것.
@@ -2657,7 +2661,9 @@ const personInfo = {
 ```
 
 ### 14.2. 여러 개의 동일한 형태(구조)의 객체를 생성한다면
+
 - `객체 생성자 함수`를 이용하는 법 (함수 이름이 `Pascal Case`)
+
 ```js
 function PersonInfo(_name, _age) {
   this.nickName = _name;
@@ -2669,12 +2675,13 @@ const BTS = new PersonInfo("BTS", 20);
 ```
 
 - `클래스`를 이용하는 법 (클래스 이름이 `Pascal Case`)
+
 ```js
 class PersonInfo {
   constructor(_name, _age) {
-  this.nickName = _name;
-  this.age = _age;
-  this.job = "singer";
+    this.nickName = _name;
+    this.age = _age;
+    this.job = "singer";
   }
 }
 
@@ -2686,6 +2693,7 @@ console.log(BTS);
 ```
 
 ### 14.3. 연습 예제
+
 ```js
 const student_1 = {
   name: "홍길동",
@@ -2696,7 +2704,7 @@ const student_2 = {
   age: 2000,
 };
 
-function Student(_name, _age){
+function Student(_name, _age) {
   this.name = _name;
   this.age = _age;
 }
@@ -2705,6 +2713,7 @@ const student_2 = new Student("둘리", 2000);
 ```
 
 ### 14.4. 객체에 값 말고 `기능 추가`하기
+
 - 기능은 흔히 `메소드(Method)` 또는 `행위(Behavior)`라고 호칭
 - 객체 리터럴로 메소드 추가해 보기
 
@@ -2713,7 +2722,7 @@ const student_1 = {
   name: "홍길동",
   age: 20,
   // 정확하게는 property 로 기능 정의하기
-  sayName: function() {
+  sayName: function () {
     this.name; // 객체
   },
   // 화살표 함수는 곤란합니다. (주의하자)
@@ -2728,22 +2737,22 @@ const student_1 = {
 ```
 
 ```js
-function student (_name, _age) {
+function student(_name, _age) {
   this.nickName = _name;
   this.age = _age;
-  this.sayName = function () {
+  (this.sayName = function () {
     console.log(this.name); // 객체
-  },
-  // 아 위험하다. 화살표 주의
-  this.sayAge = () => {
-    console.log(this.age); // window
-  } 
+  }),
+    // 아 위험하다. 화살표 주의
+    (this.sayAge = () => {
+      console.log(this.age); // window
+    });
   //this.sayHi = () {
   //  console.log(this.age);
   //},
 }
 // 같은 리소소를 사용할 때는 prototype 쓰자.
-student.prototype.sayHi = function(){}
+student.prototype.sayHi = function () {};
 const student_1 = new student("홍길동", 20);
 ```
 
@@ -2774,19 +2783,22 @@ const student_1 = new Student("홍길동", 20);
 - `객체 생성자 함수, 클래스`의 화살표 함수에서의 `this는 모듈 객체`를 가리킨다.
 
 ## 15. 배열(Array)
+
 - 데이터 종류와 상관 없이 여러 개를 `인덱싱(순서대로)` 할 수 있습니다.
 
 ### 15.1. 배열 만드는 법
+
 ```js
 // 가장 많이 함. (배열 리터럴)
-`const 배열명 = [요소, 요소, 요소];`
+`const 배열명 = [요소, 요소, 요소];`;
 // 추천하지 않음
 const 배열명 = new Array(3);
 ```
 
 ### 15.2. 배열의 요소를 찾기
+
 ```js
-const 배열 = [1, "안녕", false, function(){}]
+const 배열 = [1, "안녕", false, function () {}];
 배열[0];
 배열[1];
 배열[2];
@@ -2794,16 +2806,17 @@ const 배열 = [1, "안녕", false, function(){}]
 ```
 
 ### 15.3. 배열도 객체라서 `속성`이 있어요.
+
 ```js
 const 배열 = [1, 3, 5];
 배열.length; // 3개
 ```
 
 ### 15.4. 무지막지하게 데이터 종류 중 배열을 다룹니다.
+
 - 일반적 데이터 형태 : `[{}, {}, {}, {}]`
 - 배열을 프로그래밍에서 많이 다루므로 `미리 함수를 제공`함(빌트인 함수).
 - 주의사항으로서 절대로 `원본을 훼손하지 마셔야 합니다`(불변성 유지).
-
 
 ### 15.5. 배열을 다루는 함수에서 원본을 훼손하는 배열함수
 
@@ -3072,6 +3085,7 @@ const result = numArr1.includes(3);
 console.log(`typeof ${typeof result} , ${result}`);
 // typeof boolean , true
 ```
+
 ```js
 public : 마음대로 접근가능, 공유하는
 #  : 사적인 즉, 클래스 내부에서만 접근가능(private 역할)
@@ -3755,28 +3769,57 @@ show({ ...user });
 
 ### 17.2. 데모용 API 사이트
 
-- https://jsonplaceholder.typicode.com/
+- https://jsonplaceholder.typicode.com
 - https://www.data.go.kr/index.jsp
 
 ### 17.3. XHR
 
 - 서버와 통신하는 작업을 위해서 기본적으로 제공이 됨.
-- `Request` : 요청, url로 자료를 요청한다.
-- `Response` : 응답, url로부터 자료를 돌려받는다.
+- `Request` : 요청, url 로 자료를 요청한다.
+- `Response` : 응답, url 로 부터 자료를 돌려받는다.
 - status 200 류의 값 : 정상적으로 자료를 응답함.
-- status 400 류의 값 : url이 존재하지 않음.
+- status 400 류의 값 : url 이 존재하지 않음.
 - status 500 류의 값 : 데이터 서버가 오류거나 전원이 꺼짐.
 - https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Status
 
-// 백엔드 호출시 메소드 5가지(RestAPI 라고 함)
-// GET : 자료를 주세요.
-// POST : 자료를 추가합니다.
+```js
+// 데이터 서버에 자료를 호출함.
+
+// 1. xhr 객체 한개 만듦
+const xhr = new XMLHttpRequest();
+
+// 2. 주소를 연결함
+// 백엔드 호출시 메소드 5가지 (RestAPI 라고 함)
+// GET   : 자료를 주세요.
+// POST  : 자료를 추가합니다.
 // DELETE : 자료를 삭제해 주세요.
-// PUT : 자료 전체를 수정해 주세요.
-// PATCH : 자료 내용에서 일부분만 수정해 주세요.
+// PUT   :  자료 전체를 수정해 주세요.
+// PATCH :  자료 내용에서 일부분만 수정해 주세요.
+xhr.open("GET", "https://jsonplaceholder.typicode.com/photos");
+
+// 3. 웹브라우저로 요청을 합니다.
+xhr.send();
+
+// 4. 요청 이후 응답이 오기를 기다린다.
+xhr.onload = function () {
+  console.log("요청이 되어졌을 때 백엔드 회신정보 : ", xhr);
+  if (xhr.status === 200) {
+    console.log("정상적인 Response 됨");
+  } else if (xhr.status === 404) {
+    console.log("주소가 잘못되었네요.");
+  } else if (xhr.status === 505) {
+    console.log("서버에 오류입니다. 잠시 후 시도해 주세요.");
+  }
+};
+```
+
+### 17.4. Callback 활용하기
+
+- 자료 응답 후 처리하기
 
 ```js
 // 데이터 서버에 자료를 호출함.
+
 function getData(api = "posts", fn) {
   // 1. xhr 객체 한개 만듦
   const xhr = new XMLHttpRequest();
@@ -3799,7 +3842,6 @@ function getData(api = "posts", fn) {
     }
   };
 }
-
 // 콜백함수 만들기 : 자료가 들어오면 처리함.
 const postsParser = function (res) {
   console.log(res);
@@ -3809,9 +3851,7 @@ const albumsParser = function (res) {};
 const photosParser = function (res) {};
 const todosParser = function (res) {};
 const usersParser = function (res) {};
-
 // 함수 사용
-getData();
 getData("posts", postsParser);
 getData("comments", commentsParser);
 getData("albums", albumsParser);
@@ -3820,7 +3860,7 @@ getData("todos", todosParser);
 getData("users", usersParser);
 ```
 
-### 17.5. promise 활용하기
+### 17.5. Promise 활용하기
 
 - 서버 연동이 끝날 때 원하는 콜백함수 실행
 - 2개의 매개변수를 전달 받는다.
@@ -3828,20 +3868,99 @@ getData("users", usersParser);
 - reject 콜백함수 : 실패시 실행함수
 
 ```js
-return new Promise(function (resolve, reject) {
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
-  xhr.send();
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      // 성공
-      resolve();
-    } else if (xhr.status === 404) {
-      // 실패
-      reject();
-    } else if (xhr.status === 505) {
-      console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
-    }
-  };
-});
+// 데이터 서버에 자료를 호출함.
+
+function getData(api = "posts") {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+    xhr.send();
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // 성공
+        resolve(xhr.response);
+      } else if (xhr.status === 404) {
+        // 실패
+        reject("데이터 없어요.");
+      } else if (xhr.status === 505) {
+        console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+      }
+    };
+  });
+}
+// 함수 사용
+getData("posts")
+  .then(function (data) {
+    return getData("comments");
+  })
+  .then(function (data) {
+    return getData("albums");
+  })
+  .then(function (data) {
+    return getData("photos");
+  })
+  .then(function (data) {
+    return getData("todos");
+  })
+  .then(function (data) {
+    return getData("users");
+  })
+  .catch(function (err) {});
 ```
+
+### 17.6. async / await
+
+- 강력히 추천합니다.
+- Promise 를 편하게 쓰기위해서 최신 문법 제공
+- `function 키워드 앞쪽에 async` 를 작성합니다.
+- `BE 연동 쪽에  await` 를 작성합니다.
+
+- 1단계
+
+```js
+async function getAllData() {
+  try {
+  } catch (error) {}
+}
+
+getAllData();
+```
+
+- 2단계
+
+```js
+async function getAllData() {
+  try {
+    const apiUrl = "https://jsonplaceholder.typicode.com";
+    // BE 데이터 연동 시도
+    let res = await fetch(`${apiUrl}/posts`);
+    let data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/comments");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/albums");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/photos");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/todos");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/users");
+    data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.log("ERROR 입니다. : " + error);
+  }
+}
+getAllData();
+```
+
+sdfsdfs
